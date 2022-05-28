@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "50a7a593-9a8c-4897-9d11-a4e0f1ed2c27",
+		"name": "SCIM /User Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17949754"
+	},
+	"item": [
+		{
+			"name": "Retrive the Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"access_token\", jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "internal_user_mgt_list internal_user_mgt_create internal_user_mgt_update internal_user_mgt_delete internal_user_mgt_view",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseurl}}/oauth2/token",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/scim2/Users",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emails\": [\n        {\n            \"primary\": true,\n            \"value\": \"testing1@test.com\"\n        }\n    ],\n    \"name\": {\n        \"familyName\": \"Last Name\",\n        \"givenName\": \"Testing user\"\n    },\n    \"password\": \"Test@123\",\n    \"userName\": \"CUSTOMER-DEFAULT/testing1@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Users",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Specific User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/scim2/Users/6a86b516-798e-4678-8d60-f68097f76150",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Users",
+						"6a86b516-798e-4678-8d60-f68097f76150"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT  Update User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"emails\": [\n        {\n            \"primary\": true,\n            \"value\": \"testing1@test.com\"\n        }\n    ],\n    \"name\": {\n        \"familyName\": \"last\",\n        \"givenName\": \"Testing user\"\n    },\n    \"password\": \"Test@123\",\n    \"userName\": \"CUSTOMER-DEFAULT/testing1@test.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Users/6a86b516-798e-4678-8d60-f68097f76150",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Users",
+						"6a86b516-798e-4678-8d60-f68097f76150"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Specific User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/scim2/Users/b38fbc87-e094-4345-829e-8e93f9c2fab6",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Users",
+						"b38fbc87-e094-4345-829e-8e93f9c2fab6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User - PATCH",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "b881676b-17a1-3561-8cc4-da2f53a78872",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"schemas\": [\n    \"urn:ietf:params:scim:api:messages:2.0:PatchOp\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"add\",\n      \"value\": {\n        \"nickName\": \"shaggy\"\n      }\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Users/72f4a8aa-cb85-4442-a0aa-0474348832c3",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Users",
+						"72f4a8aa-cb85-4442-a0aa-0474348832c3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://api.asgardeo.io/t/<org_name>"
+		}
+	]
+}

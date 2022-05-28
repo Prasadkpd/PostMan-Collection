@@ -1,0 +1,275 @@
+{
+	"info": {
+		"_postman_id": "e8e9b6a4-a9ba-4339-b9fd-add56ed69bfc",
+		"name": "Asgardeo- OAuth2.0 DCR API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17949754"
+	},
+	"item": [
+		{
+			"name": "POST Retrieve Access Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cookie",
+						"value": "paf=1644817799.641.40.704425|71acb898e1e9604d7bd8c41e308eb24e"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "internal_application_mgt_create internal_application_mgt_delete internal_application_mgt_update internal_application_mgt_view",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/oauth2/token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET OAuth2 Application Using Client_ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0cceb146-1771-37e4-9e4c-a4292cb1b9dd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/identity/oauth2/dcr/v1.1/register/{{client_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"identity",
+						"oauth2",
+						"dcr",
+						"v1.1",
+						"register",
+						"{{client_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET OAuth2 Application Using Client_Name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "0cceb146-1771-37e4-9e4c-a4292cb1b9dd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/identity/oauth2/dcr/v1.1/register?client_name=API",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"identity",
+						"oauth2",
+						"dcr",
+						"v1.1",
+						"register"
+					],
+					"query": [
+						{
+							"key": "client_name",
+							"value": "API"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE OAuth2 Applicaiton",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "<access_token>",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/identity/oauth2/dcr/v1.1/register/<client_id>",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"identity",
+						"oauth2",
+						"dcr",
+						"v1.1",
+						"register",
+						"<client_id>"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update OAuth2 Application",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "<access_token>",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"redirect_uris\": [\n        \"https://client.example.org/callback\"\n    ],\n    \"client_name\": \"Application_1\",\n    \"grant_types\": [\n        \"password\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/identity/oauth2/dcr/v1.1/register/<client_id>",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"identity",
+						"oauth2",
+						"dcr",
+						"v1.1",
+						"register",
+						"<client_id>"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Create New OAuth2 Application",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "<access_token>",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ext_param_client_id\": \"provided_client_id0001\",\n    \"ext_param_client_secret\": \"provided_client_secret0001\",\n    \"redirect_uris\": [\n        \"http://localhost:5000\"\n    ],\n    \"grant_types\": [\n        \"authorization_code\",\n        \"refresh_token\"\n    ],\n    \"client_name\": \"Test_OAuth2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/identity/oauth2/dcr/v1.1/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"identity",
+						"oauth2",
+						"dcr",
+						"v1.1",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://api.asgardeo.io/t/<org_name>"
+		}
+	]
+}

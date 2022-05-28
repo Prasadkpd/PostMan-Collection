@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "2060d30e-cb5e-4202-9108-41c60c434bfc",
+		"name": "Teach-Me",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17949754"
+	},
+	"item": [
+		{
+			"name": "HealthCheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}/api/v1/check",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate The Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Cookie",
+						"value": "atbv=646b0ed2-c501-4b17-9251-94112013a718"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic {{basic_base64}}"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "179b0c49-0f38-3452-9d7f-9e32ee5592ce",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.asgardeo.io/t/prasadkpd/oauth2/introspect",
+					"protocol": "https",
+					"host": [
+						"api",
+						"asgardeo",
+						"io"
+					],
+					"path": [
+						"t",
+						"prasadkpd",
+						"oauth2",
+						"introspect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "api_url",
+			"value": "http://localhost:1337/api/v1"
+		}
+	]
+}

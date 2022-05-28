@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "8d913e7d-5d63-41d9-9380-98c8f61d3f24",
+		"name": "SCIM /Groups",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17949754"
+	},
+	"item": [
+		{
+			"name": "GET /Groups",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "idtoken",
+						"value": "eyJ4NXQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZyIsImtpZCI6Ik16WXhNbUZrT0dZd01XSTBaV05tTkRjeE5HWXdZbU00WlRBM01XSTJOREF6WkdRek5HTTBaR1JsTmpKa09ERmtaRFJpT1RGa01XRmhNelUyWkdWbE5nX1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJhdF9oYXNoIjoiOFZabUJGR280ZXpPVzEtNXd4QmtodyIsInN1YiI6ImFkbWluQHdzbzIuY29tIiwiaWRwaWQiOiJmZGFmcyIsImFtciI6WyJPcGVuSURDb25uZWN0QXV0aGVudGljYXRvciJdLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0Ojk0NDNcL29hdXRoMlwvdG9rZW4iLCJnaXZlbl9uYW1lIjoiSnNvbiIsImF1ZCI6IkZDWDl5Y1EzbDNzYTZWbFNVU2JkTFJhNVFJRWEiLCJjX2hhc2giOiJnOHNtbTllcGZDSG9Yc0RzWkxvdEhRIiwibmJmIjoxNjI4MTQ2NDIyLCJhenAiOiJGQ1g5eWNRM2wzc2E2VmxTVVNiZExSYTVRSUVhIiwiZXhwIjoxNjI4MTUwMDIyLCJpYXQiOjE2MjgxNDY0MjIsIk11bHRpQXR0cmlidXRlU2VwYXJhdG9yIjpbXSwiZmFtaWx5X25hbWUiOiJBZG1pbmlzdHJhdG9yIiwiZW1haWwiOiJhZG1pbkB3c28yLmNvbSJ9.jAjW3-0Hv5kDMzVeMFUTYU416-JMbhGTXIqiLa0gZA4NyTtPSJgHyEFHPuSWmAYJAaANtVCme8E75EngVbp8smZ1heJvcYi2kjTn1ETdB7B8fTnL0fb-K_dwcxgdWtMckqG797cSecFfa6g6PJPjKJ4t5xYzaxL-GoJwZAPzWEYY3US65NjQZ6Znc7avPy-9YW1B3p0GPqotcfMJ0TEGwj9SA28wSba5w0qnuWB3av3h34IZ89rQYEzp6-qA5tIBA-vYwSX5zpRyB6pqBELn4k-UFqsAE0rGOGu9cKzjF0xB4hWYwskqovG5E_eINPJnvJ0RUiLwHSV_7y7p9wNf-w",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /oauth2/token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"access_token\", jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/oauth2/token",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /Groups",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"schemas\": [\n    \"urn:ietf:params:scim:schemas:core:2.0:Group\"\n  ],\n  \"displayName\": \"manager\",\n  \"members\": [\n    {\n      \"value\": \"008bba85-451d-414b-87de-c03b5a1f4217\",\n      \"display\": \"kim\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /Groups/.search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"schemas\": [\n    \"urn:ietf:params:scim:api:messages:2.0:SearchRequest\"\n  ],\n  \"startIndex\": 1,\n  \"filter\": \"displayName eq manager\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups/.search",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups",
+						".search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /Grous/{id}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups/{id}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /Groups/{id}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"displayName\": \"manager\",\n  \"members\": [\n    {\n      \"value\": \"409ca90b-2ba6-4474-9a45-2cf7376e6e43\",\n      \"display\": \"kris\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups/{id}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /Groups/{id}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups/{id}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /Groups/{id}",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"schemas\": [\n    \"urn:ietf:params:scim:api:messages:2.0:PatchOp\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"add\",\n      \"value\": {\n        \"members\": [\n          {\n            \"display\": \"kris\",\n            \"value\": \"409ca90b-2ba6-4474-9a45-2cf7376e6e43\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseurl}}/scim2/Groups/{id}",
+					"host": [
+						"{{baseurl}}"
+					],
+					"path": [
+						"scim2",
+						"Groups",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://api.asgardeo.io/t/<org_name>"
+		}
+	]
+}
